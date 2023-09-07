@@ -57,6 +57,22 @@ def matriz_conjugada(mat):
     """
     return np.conjugate(mat)
 
+def prod_tensor(mat1,mat2):
+    """producto tensor de dos matrices/vectores"""
+
+    m = len(mat1)
+    n = len(mat2)
+    m1 = len(mat1[0])
+    n1 = len(mat2[0])
+    fila = m * n
+    columna = n1 * m1
+
+    matriz = [[0 for i in range(fila)] for columna in range(columna)]
+    for j in range(fila):
+        for k in range(columna):
+            matriz[j][k] = (mat1[j // n][k // n] * mat2[j % n][k % n1])
+    return matriz
+
 # Casos de prueba para las funciones de operaciones con números complejos
 
 # Vectores complejos
@@ -79,3 +95,4 @@ print("Multiplicación escalar de matriz compleja:\n", multiplicar_escalar_matri
 
 print("Matriz transpuesta:\n", matriz_transpuesta(mat3))
 print("Matriz conjugada:\n", matriz_conjugada(mat3))
+print('producto tensor',prod_tensor([[1+2j, 3-1j], [0+1j, -2-3j]],[[2-1j, 4+3j], [1-2j, 5+4j]]))
